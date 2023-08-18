@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## vite output
+src/main/resources/static/
+src/main/resources/templates/index.html
