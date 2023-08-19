@@ -9,8 +9,9 @@
     "preview": "echo \"This is a Thymeleaf template. Build first then run the Spring Boot project.\" && vite preview"
   },
   "devDependencies": {
+    "htmx.org": "^1.9.4",
+    "purecss": "^3.0.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "htmx.org": "^1.9.4"
+    "vite": "^4.4.5"
   }
 }

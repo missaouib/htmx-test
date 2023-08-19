@@ -1,5 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="landing">
-        <h3 hx-get="/greeting" hx-trigger="load"></h3>
-    </div>
+  <div th:fragment="contents">
+    <div th:replace="~{transactions::grid}">Here goes the transaction table.</div>
+  </div>
 </div>

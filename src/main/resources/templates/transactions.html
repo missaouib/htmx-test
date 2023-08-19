@@ -1,0 +1,39 @@
+<div xmlns:th="http://www.thymeleaf.org">
+  <div th:fragment="grid">
+    <div th:replace="~{transactions::pagination}"></div>
+    <table>
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Account</th>
+        <th>Category</th>
+        <th>Note</th>
+        <th>Amount</th>
+      </tr>
+      </thead>
+      <tbody th:replace="~{transactions::list}">Here goes the transaction list.</tbody>
+    </table>
+    <div th:replace="~{transactions::pagination}"></div>
+  </div>
+
+  <table>
+    <tbody th:fragment="list" th:remove="all-but-first">
+    <tr th:each="transaction : ${userData.transactions}">
+      <td th:text="${#temporals.format(transaction.date, 'dd/MMM/yyyy hh:mm a')}">18/ago/2023 06:32 pm</td>
+      <td th:text="${transaction.account}">Savings</td>
+      <td th:text="${transaction.category}">Groceries</td>
+      <td th:text="${transaction.note}">Payment at MASXMENOS</td>
+      <td th:text="${#numbers.formatCurrency(transaction.amount)}">($ 54,650.00)</td>
+    </tr>
+    <tr>
+      <td>18/ago/2023 06:35 pm</td>
+      <td>Savings</td>
+      <td>Healthcare</td>
+      <td>Payment at CRUZVERDE</td>
+      <td>($ 19,990.00)</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div th:fragment="pagination">This is the pagination fragment.</div>
+</div>
