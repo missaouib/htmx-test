@@ -1,0 +1,16 @@
+name: htmx-compose
+
+services:
+  postgres:
+    image: postgres:15.4-alpine
+    container_name: htmx-postgres
+    ports:
+      - 5442:5432
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+    secrets:
+      - postgres_password
+
+secrets:
+  postgres_password:
+    file: secrets/postgres_password
