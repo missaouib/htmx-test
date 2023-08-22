@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,5 +29,39 @@ public class TransactionService {
 				transaction.getNote(),
 				transaction.getAmount()
 		);
+	}
+
+	public record PageItem(long number, boolean selected, boolean blank) {
+		public static final PageItem GAP = new PageItem(-1L, false, true);
+	}
+
+	/**
+	 * Return a list of pages to show in the pagination of transactions.
+	 *
+	 * @param current the currently selected page
+	 * @param page    the page size
+	 * @param window  the window size around the selected page
+	 * @return the list of pages
+	 */
+	public List<PageItem> getPagination(long current, int page, int window) {
+		final long count = repository.count();
+		long pages = count / page + (count % page == 0 ? 0 : 1);
+
+		var result = new ArrayList<PageItem>(3 + 2 * window);
+		long i = 1;
+		while (i <= pages) {
+			if (i != 1 && i != pages) {
+				if (i < current - window) {
+					i = current - window;
+					result.add(PageItem.GAP);
+				} else if (i > current + window) {
+					i = pages;
+					result.add(PageItem.GAP);
+				}
+			}
+			result.add(new PageItem(i, i == current, false));
+			i++;
+		}
+		return List.copyOf(result);
 	}
 }

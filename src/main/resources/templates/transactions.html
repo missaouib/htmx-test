@@ -1,6 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org">
   <div th:fragment="grid">
-    <div th:replace="~{transactions::pagination}"></div>
     <table class="pure-table">
       <thead>
       <tr>
@@ -30,5 +29,8 @@
     </tbody>
   </table>
 
-  <div th:fragment="pagination">This is the pagination fragment.</div>
+  <ul th:fragment="pagination">
+    <li th:each="pageItem : ${userData.pagination}" th:text="${pageItem.blank ? '&#8230;' : pageItem.number}"
+        th:classappend="${pageItem.selected} ? 'selected'"></li>
+  </ul>
 </div>
