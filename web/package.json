@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "echo \"This is a Thymeleaf template. Build first then run the Spring Boot project.\" && vite",
-    "build": "tsc && vite build && mv ../src/main/resources/static/index.html ../src/main/resources/templates",
+    "build": "tsc && vite build",
+    "watch": "vite build --watch",
     "preview": "echo \"This is a Thymeleaf template. Build first then run the Spring Boot project.\" && vite preview"
   },
   "devDependencies": {
     "htmx.org": "^1.9.4",
-    "purecss": "^3.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }

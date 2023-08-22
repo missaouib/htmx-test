@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <link rel="icon" type="image/svg+xml" href="/icon.svg"/>
@@ -7,7 +7,7 @@
   <title>htmx test</title>
 </head>
 <body>
-<div th:replace="~{landing::contents}">This message should not show.</div>
+<div hx-get="/landing" hx-trigger="load">This message should not show.</div>
 <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
