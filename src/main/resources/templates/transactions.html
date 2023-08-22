@@ -20,11 +20,18 @@
   <table>
     <tbody th:fragment="list" th:remove="tag">
     <tr th:each="transaction : ${userData.transactions}">
-      <td th:text="${#temporals.format(transaction.date, 'dd/MMM/yyyy hh:mm a')}">18/ago/2023 06:32 pm</td>
+      <td>
+        <sl-format-date th:date="${#temporals.formatISO(transaction.date)}"
+                        year="numeric" month="2-digit" day="2-digit"
+                        hour="2-digit" minute="2-digit"></sl-format-date>
+      </td>
       <td th:text="${transaction.account}">Savings</td>
       <td th:text="${transaction.category}">Groceries</td>
       <td th:text="${transaction.note}">Payment at MASXMENOS</td>
-      <td th:text="${#numbers.formatCurrency(transaction.amount)}">($ 54,650.00)</td>
+      <td>
+        <sl-format-number th:value="${transaction.amount}"
+                          type="currency" currency="COP" lang="es-CO"></sl-format-number>
+      </td>
     </tr>
     </tbody>
   </table>
