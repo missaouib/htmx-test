@@ -7,7 +7,9 @@
   <title>htmx test</title>
 </head>
 <body>
-<div hx-get="/landing" hx-trigger="load">This message should not show.</div>
-<script type="module" src="/src/main.ts"></script>
+<div hx-get="/landing" hx-trigger="load">
+  <sl-spinner style="font-size: 3rem;"></sl-spinner>
+</div>
+<script type="module" src="./src/main.ts"></script>
 </body>
 </html>

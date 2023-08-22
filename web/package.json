@@ -10,8 +10,10 @@
     "preview": "echo \"This is a Thymeleaf template. Build first then run the Spring Boot project.\" && vite preview"
   },
   "devDependencies": {
+    "@shoelace-style/shoelace": "^2.7.0",
     "htmx.org": "^1.9.4",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-static-copy": "^0.17.0"
   }
 }
