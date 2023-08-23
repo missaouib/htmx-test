@@ -21,23 +21,26 @@
     <tbody th:fragment="list" th:remove="tag">
     <tr th:each="transaction : ${userData.transactions}">
       <td>
-        <sl-format-date th:date="${#temporals.formatISO(transaction.date)}"
-                        year="numeric" month="2-digit" day="2-digit"
-                        hour="2-digit" minute="2-digit"></sl-format-date>
+        <sl-format-date
+            th:date="${#temporals.formatISO(transaction.date)}"
+            year="numeric" month="2-digit" day="2-digit"
+            hour="2-digit" minute="2-digit"></sl-format-date>
       </td>
       <td th:text="${transaction.account}">Savings</td>
       <td th:text="${transaction.category}">Groceries</td>
       <td th:text="${transaction.note}">Payment at MASXMENOS</td>
       <td>
-        <sl-format-number th:value="${transaction.amount}"
-                          type="currency" currency="COP" lang="es-CO"></sl-format-number>
+        <intl-number-format
+            th:value="${transaction.amount}"
+            options='{"style":"currency","currency":"COP","currencySign":"accounting"}'></intl-number-format>
       </td>
     </tr>
     </tbody>
   </table>
 
   <ul th:fragment="pagination">
-    <li th:each="pageItem : ${userData.pagination}" th:text="${pageItem.blank ? '&#8230;' : pageItem.number}"
+    <li th:each="pageItem : ${userData.pagination}"
+        th:text="${pageItem.blank ? '&#8230;' : pageItem.number}"
         th:classappend="${pageItem.selected} ? 'selected'"></li>
   </ul>
 </div>

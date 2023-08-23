@@ -12,6 +12,7 @@
   "devDependencies": {
     "@shoelace-style/shoelace": "^2.7.0",
     "htmx.org": "^1.9.4",
+    "lit": "^2.8.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-static-copy": "^0.17.0"
