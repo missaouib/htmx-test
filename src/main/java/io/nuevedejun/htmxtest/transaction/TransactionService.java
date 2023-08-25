@@ -31,8 +31,8 @@ public class TransactionService {
 		);
 	}
 
-	public record PageItem(long number, boolean selected, boolean blank) {
-		public static final PageItem GAP = new PageItem(-1L, false, true);
+	public record PageItem(int number, boolean selected, boolean blank) {
+		public static final PageItem GAP = new PageItem(-1, false, true);
 	}
 
 	/**
@@ -43,12 +43,12 @@ public class TransactionService {
 	 * @param window  the window size around the selected page
 	 * @return the list of pages
 	 */
-	public List<PageItem> getPagination(long current, int page, int window) {
+	public List<PageItem> getPagination(int current, int page, int window) {
 		final long count = repository.count();
-		long pages = count / page + (count % page == 0 ? 0 : 1);
+		int pages = (int) Math.ceilDiv(count, page);
 
 		var result = new ArrayList<PageItem>(3 + 2 * window);
-		long i = 1;
+		int i = 1;
 		while (i <= pages) {
 			if (i != 1 && i != pages) {
 				if (i < current - window) {
