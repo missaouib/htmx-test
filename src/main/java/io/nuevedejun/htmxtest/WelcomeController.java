@@ -23,6 +23,6 @@ public class WelcomeController {
 
 	@GetMapping("/welcome")
 	public String welcome() {
-		return "welcome::contents";
+		return "welcome";
 	}
 }

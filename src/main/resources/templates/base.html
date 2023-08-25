@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>base</title>
+</head>
+<body>
+<div class="w-screen h-screen" th:fragment="wrap(contents)">
+  <div class="w-full h-full flex flex-col">
+    <header>This is the header of the page</header>
+    <main>
+      <th:block th:replace="${contents}"/>
+    </main>
+    <footer>This is the footer of the page</footer>
+  </div>
+</div>
+</body>
+</html>

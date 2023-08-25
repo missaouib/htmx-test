@@ -1,53 +1,13 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{head::wrap(~{::title},~{::body})}" lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <link rel="icon" type="image/svg+xml" href="/icon.svg"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>htmx test</title>
-  <script type="module" crossorigin src="/assets/index.js"></script>
-  <link rel="stylesheet" href="/assets/index.css">
+  <title>welcome</title>
 </head>
 <body>
-<div th:fragment="contents" class="w-full h-full flex flex-col">
-  <div id="transaction-explorer" th:fragment="transactions">
-    <table>
-      <thead>
-      <tr>
-        <th>Date</th>
-        <th>Account</th>
-        <th>Category</th>
-        <th>Note</th>
-        <th>Amount</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="transaction : ${userData.transactions}">
-        <td>
-          <sl-format-date
-              th:date="${#temporals.formatISO(transaction.date)}"
-              year="numeric" month="2-digit" day="2-digit"
-              hour="2-digit" minute="2-digit">
-          </sl-format-date>
-        </td>
-        <td th:text="${transaction.account}">Savings</td>
-        <td th:text="${transaction.category}">Groceries</td>
-        <td th:text="${transaction.note}">Payment at MASXMENOS</td>
-        <td>
-          <intl-number-format
-              th:value="${transaction.amount}"
-              options='{"style":"currency","currency":"COP","currencySign":"accounting"}'>
-          </intl-number-format>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <ul class="pagination">
-      <li th:each="pageItem : ${userData.pagination}"
-          th:text="${pageItem.blank ? '&#8230;' : pageItem.number}"
-          class="inline-block"
-          th:classappend="${pageItem.selected} ? 'selected'"></li>
-    </ul>
+<div th:replace="~{base::wrap(~{::default})}">
+  <div th:fragment="default"
+       th:insert="~{transactions::#transaction-explorer}"
+       class="w-full h-full flex flex-col">
   </div>
 </div>
 </body>

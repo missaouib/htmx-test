@@ -7,11 +7,9 @@
   <title>htmx test</title>
 </head>
 <body>
-<div class="w-screen h-screen">
-  <div hx-get="/welcome" hx-trigger="load" hx-swap="outerHTML"
-       class="w-full h-full flex items-center justify-center">
-    <sl-spinner class="htmx-indicator" style="font-size: 3rem; --track-width: .6rem"></sl-spinner>
-  </div>
+<div hx-get="/welcome" hx-trigger="load" hx-swap="outerHTML" hx-select="body > div"
+     class="w-screen h-screen flex items-center justify-center">
+  <sl-spinner class="htmx-indicator" style="font-size: 3rem; --track-width: .6rem"></sl-spinner>
 </div>
 <script type="module" src="./src/main.ts"></script>
 </body>
