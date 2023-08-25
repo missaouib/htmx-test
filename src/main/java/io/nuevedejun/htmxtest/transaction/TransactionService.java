@@ -45,14 +45,14 @@ public class TransactionService {
 	 */
 	public List<PageItem> getPagination(int current, int page, int window) {
 		final long count = repository.count();
-		int pages = (int) Math.ceilDiv(count, page);
+		final int pages = (int) Math.ceilDiv(count, page);
 
 		var result = new ArrayList<PageItem>(3 + 2 * window);
 		int i = 1;
 		while (i <= pages) {
 			if (i != 1 && i != pages) {
 				if (i < current - window) {
-					i = current - window;
+					i = Math.min(current - window, pages);
 					result.add(PageItem.GAP);
 				} else if (i > current + window) {
 					i = pages;
