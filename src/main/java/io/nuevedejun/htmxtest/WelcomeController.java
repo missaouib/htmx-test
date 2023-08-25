@@ -21,8 +21,8 @@ public class WelcomeController {
 		return userDataProvider.get();
 	}
 
-	@GetMapping("/landing")
-	public String landing() {
-		return "landing::contents";
+	@GetMapping("/welcome")
+	public String welcome() {
+		return "welcome::contents";
 	}
 }

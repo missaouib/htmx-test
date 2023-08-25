@@ -1,0 +1,35 @@
+.w-screen {
+    width: 100vw;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.flex {
+    display: flex
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center
+}
+
+.justify-center {
+    justify-content: center
+}
+
+.inline-block {
+    display: inline-block;
+}
