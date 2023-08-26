@@ -37,6 +37,14 @@
       </tr>
       </tbody>
     </table>
+    <label>Results per page:
+      <span class="dropdown">
+      <select name="transaction-page-size" class="text-right">
+        <option th:each="size : ${viewOptions.pageSizes}" th:value="${size}" th:text="${size}"
+                th:selected="${size == userData.size}">20</option>
+      </select>
+    </span>
+    </label>
     <ul class="pagination" hx-boost="true" hx-target="#transaction-explorer" hx-select="#transaction-explorer">
       <li th:each="pageItem : ${userData.pagination}" class="inline-block">
         <a th:unless="${pageItem.blank}" th:text="${pageItem.number}"
@@ -45,10 +53,6 @@
            th:classappend="${pageItem.selected} ? 'selected'"> </a>
         <div th:if="${pageItem.blank}" class="flex w-full h-full items-center justify-center">&#8230;</div>
       </li>
-      <!--
-      - href should point to /transactions?page=1&size=20
-      - the controller should return a whole page but htmx should select a sub-element
-       -->
     </ul>
   </div>
 </div>

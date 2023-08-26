@@ -37,3 +37,7 @@
 .inline-flex {
     display: inline-flex;
 }
+
+.text-right {
+    text-align: right;
+}

@@ -1,0 +1,29 @@
+.pagination {
+    user-select: none;
+}
+
+.pagination li {
+    height: 2.2rem;
+    min-width: 2.2rem;
+}
+
+.pagination a {
+    color: var(--sl-color-teal-950);
+    font-size: .9rem;
+    font-weight: 200;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background-color: var(--sl-color-gray-100);
+}
+
+.pagination a.selected {
+    color: #ffffff;
+    background-color: var(--sl-color-teal-900);
+}
+
+.pagination a.selected:hover {
+    background-color: var(--sl-color-teal-950);
+}
