@@ -8,9 +8,8 @@
 }
 
 .pagination a {
-    color: var(--sl-color-teal-950);
+    color: var(--sl-color-neutral-1000);
     font-size: .9rem;
-    font-weight: 200;
     border-radius: 50%;
     text-decoration: none;
 }
@@ -20,7 +19,7 @@
 }
 
 .pagination a.selected {
-    color: #ffffff;
+    color: var(--sl-color-neutral-0);
     background-color: var(--sl-color-teal-900);
 }
 

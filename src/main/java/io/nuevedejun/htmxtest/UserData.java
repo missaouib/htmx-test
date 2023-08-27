@@ -7,6 +7,7 @@ import io.nuevedejun.htmxtest.transaction.TransactionService;
 import io.nuevedejun.htmxtest.transaction.TransactionService.PageItem;
 import io.nuevedejun.htmxtest.user.UserInfoService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class UserData {
 
 	private final TransactionService transactionService;
 	private final UserInfoService userInfoService;
+	@Getter
 	private final int page;
 
 	/**

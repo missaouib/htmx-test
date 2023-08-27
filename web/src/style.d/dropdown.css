@@ -32,3 +32,7 @@
     border-top: 5px solid var(--sl-color-gray-400);
     pointer-events: none;
 }
+
+.size-dropdown {
+    font-size: .9rem;
+}
