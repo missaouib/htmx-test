@@ -6,11 +6,11 @@
 <body>
 <div class="w-screen h-screen" th:fragment="wrap(contents)">
   <div class="w-full h-full flex flex-col">
-    <header>This is the header of the page</header>
-    <main>
+    <header class="flex-initial">This is the header of the page</header>
+    <main class="flex-1 min-h-0 overflow-auto">
       <th:block th:replace="${contents}"/>
     </main>
-    <footer>This is the footer of the page</footer>
+    <footer class="flex-initial">This is the footer of the page</footer>
   </div>
 </div>
 </body>
