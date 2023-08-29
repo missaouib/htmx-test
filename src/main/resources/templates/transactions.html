@@ -7,7 +7,7 @@
 <div th:replace="~{base::wrap(~{::#transaction-explorer})}">
   <div id="transaction-explorer" class="w-full h-full flex flex-col">
     <div class="flex-1 min-h-0 overflow-auto">
-      <table>
+      <table class="data-table">
         <colgroup>
           <col/><!--Set widths, resizable horizonral, ellipsis, overflow hidden
           - Save user preferred widths -->
@@ -18,7 +18,7 @@
           <th>Account</th>
           <th>Category</th>
           <th>Note</th>
-          <th>Amount</th>
+          <th class="text-right">Amount</th>
         </tr>
         </thead>
         <tbody>
