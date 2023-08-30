@@ -13,7 +13,7 @@
 }
 
 .pagination a:hover {
-    background-color: var(--sl-color-gray-100);
+    background-color: var(--sl-color-neutral-100);
 }
 
 .pagination .selected {
@@ -22,6 +22,6 @@
 }
 
 .pagination .selected, .pagination a {
-    font-size: .9rem;
+    font-size: var(--sl-font-size-small);
     border-radius: 50%;
 }

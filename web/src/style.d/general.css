@@ -82,10 +82,22 @@
     top: 0;
 }
 
-.bg-neutral {
-    background-color: var(--sl-color-neutral-0);
-}
-
 .p-4 {
     padding: 1rem
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.max-w-xxs {
+    max-width: 12.5rem;
+}
+
+.max-w-xxxs {
+    max-width: 10rem;
 }

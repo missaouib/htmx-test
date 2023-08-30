@@ -1,0 +1,4 @@
+.data-table th, .data-table td {
+    padding: var(--sl-spacing-small);
+    border-bottom: 1px solid var(--sl-color-neutral-300);
+}

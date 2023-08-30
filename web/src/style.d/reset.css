@@ -3,9 +3,10 @@
 }
 
 body, ul {
-    font-family: sans-serif;
+    font-family: var(--sl-font-sans);
     margin: 0;
     padding: 0;
+    line-height: var(--sl-line-height-dense);
 }
 
 table {

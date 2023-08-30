@@ -1,5 +1,6 @@
 @import "style.d/reset.css";
 @import "style.d/general.css";
+@import "style.d/decoration.css";
 @import "style.d/pagination.css";
-@import "style.d/rounded-solid.css";
 @import "style.d/dropdown.css";
+@import "style.d/data-table.css";

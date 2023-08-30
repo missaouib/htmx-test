@@ -1,0 +1,12 @@
+.rounded-solid {
+    border: 1px solid var(--sl-color-neutral-300);
+    border-radius: .375rem;
+}
+
+.discoverable:hover {
+    white-space: normal;
+}
+
+.bg-neutral {
+    background-color: var(--sl-color-neutral-0);
+}
