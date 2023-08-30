@@ -5,67 +5,74 @@
 </head>
 <body>
 <div th:replace="~{base::wrap(~{::#transaction-explorer})}">
-  <div id="transaction-explorer" class="w-full h-full flex flex-col">
-    <div class="flex-1 min-h-0 overflow-auto">
-      <table class="data-table">
-        <colgroup>
-          <col/><!--Set widths, resizable horizonral, ellipsis, overflow hidden
+  <div id="transaction-explorer" class="w-full h-full p-4">
+    <div class="w-full h-full flex flex-col rounded-solid overflow-hidden">
+      <div class="flex-1 min-h-0 overflow-auto">
+        <table class="text-left">
+          <!--Set widths, resizable horizonral, ellipsis, overflow hidden
           - Save user preferred widths -->
-        </colgroup>
-        <thead class="sticky top-0 bg-neutral">
-        <tr>
-          <th>Date</th>
-          <th>Account</th>
-          <th>Category</th>
-          <th>Note</th>
-          <th class="text-right">Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="transaction : ${userData.transactions}">
-          <td>
-            <sl-format-date
-                th:date="${#temporals.formatISO(transaction.date)}"
-                year="numeric" month="2-digit" day="2-digit"
-                hour="2-digit" minute="2-digit">
-            </sl-format-date>
-          </td>
-          <td th:text="${transaction.account}">Savings</td>
-          <td th:text="${transaction.category}">Groceries</td>
-          <td th:text="${transaction.note}">Payment at MASXMENOS</td>
-          <td>
-            <intl-number-format
-                th:value="${transaction.amount}"
-                options='{"style":"currency","currency":"COP","currencySign":"accounting"}'>
-            </intl-number-format>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="flex-initial flex flex-row">
-      <div class="size-dropdown">
-        <label>
-          Results per page:
-          <span class="dropdown">
-            <select th:field="${userData.size}" class="text-right"
-                    th:hx-get="@{/transactions(page=${userData.page})}"
-                    hx-target="#transaction-explorer" hx-select="#transaction-explorer"
-                    hx-push-url="true">
-              <option th:each="size : ${viewOptions.pageSizes}" th:value="${size}" th:text="${size}">20</option>
-            </select>
-          </span>
-        </label>
+          <thead class="sticky top-0 bg-neutral">
+          <tr>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Category</th>
+            <th>Note</th>
+            <th class="text-right">Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="transaction : ${userData.transactions}">
+            <td>
+              <sl-format-date
+                  th:date="${#temporals.formatISO(transaction.date)}"
+                  year="numeric" month="2-digit" day="2-digit"
+                  hour="2-digit" minute="2-digit">
+              </sl-format-date>
+            </td>
+            <td th:text="${transaction.account}">Savings</td>
+            <td th:text="${transaction.category}">Groceries</td>
+            <td th:text="${transaction.note}">Payment at MASXMENOS</td>
+            <td class="text-right">
+              <intl-number-format
+                  th:value="${transaction.amount}"
+                  options='{"style":"currency","currency":"COP","currencySign":"accounting"}'>
+              </intl-number-format>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <ul class="pagination" hx-boost="true" hx-target="#transaction-explorer" hx-select="#transaction-explorer">
-        <li th:each="pageItem : ${userData.pagination}" class="inline-block">
-          <a th:unless="${pageItem.blank}" th:text="${pageItem.number}"
-             th:href="@{/transactions(page=${pageItem.number},size=${userData.size})}"
-             class="flex w-full h-full items-center justify-center"
-             th:classappend="${pageItem.selected} ? 'selected'"> </a>
-          <div th:if="${pageItem.blank}" class="flex w-full h-full items-center justify-center">&#8230;</div>
-        </li>
-      </ul>
+      <div class="flex-initial flex flex-row">
+        <div class="size-dropdown">
+          <label>
+            Results per page:
+            <span class="dropdown">
+              <select th:field="${userData.size}" class="text-right"
+                      th:hx-get="@{/transactions(page=${userData.page})}"
+                      hx-target="#transaction-explorer"
+                      hx-select="#transaction-explorer"
+                      hx-swap="outerHTML"
+                      hx-push-url="true">
+                <option th:each="size : ${viewOptions.pageSizes}" th:value="${size}" th:text="${size}">20</option>
+              </select>
+            </span>
+          </label>
+        </div>
+        <ul class="pagination"
+            hx-boost="true"
+            hx-target="#transaction-explorer"
+            hx-select="#transaction-explorer"
+            hx-swap="outerHTML">
+          <li th:each="pageItem : ${userData.pagination}" class="inline-block">
+            <div th:if="${pageItem.selected}" th:text="${pageItem.number}"
+                 class="flex w-full h-full items-center justify-center selected"></div>
+            <div th:if="${pageItem.blank}" class="flex w-full h-full items-center justify-center">&#8230;</div>
+            <a th:unless="${pageItem.blank || pageItem.selected}" th:text="${pageItem.number}"
+               th:href="@{/transactions(page=${pageItem.number},size=${userData.size})}"
+               class="flex w-full h-full items-center justify-center">1</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

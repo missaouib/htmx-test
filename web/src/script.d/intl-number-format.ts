@@ -13,7 +13,8 @@ export class IntlNumberFormat extends LitElement {
 
     render() {
         const formatter = new Intl.NumberFormat(this.locale, this.options);
-        return html`<span>${formatter.format(this.value)}</span>`;
+        return html`
+          <data value="${this.value}">${formatter.format(this.value)}</data>`;
     }
 }
 

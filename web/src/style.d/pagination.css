@@ -9,8 +9,6 @@
 
 .pagination a {
     color: var(--sl-color-neutral-1000);
-    font-size: .9rem;
-    border-radius: 50%;
     text-decoration: none;
 }
 
@@ -18,11 +16,12 @@
     background-color: var(--sl-color-gray-100);
 }
 
-.pagination a.selected {
+.pagination .selected {
     color: var(--sl-color-neutral-0);
     background-color: var(--sl-color-teal-900);
 }
 
-.pagination a.selected:hover {
-    background-color: var(--sl-color-teal-950);
+.pagination .selected, .pagination a {
+    font-size: .9rem;
+    border-radius: 50%;
 }

@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.w-max {
+    width: max-content;
+}
+
 .h-full {
     height: 100%;
 }
@@ -42,6 +46,10 @@
     display: inline-flex;
 }
 
+.text-left {
+    text-align: left;
+}
+
 .text-right {
     text-align: right;
 }
@@ -62,6 +70,10 @@
     overflow: auto;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .sticky {
     position: sticky;
 }
@@ -72,4 +84,8 @@
 
 .bg-neutral {
     background-color: var(--sl-color-neutral-0);
+}
+
+.p-4 {
+    padding: 1rem
 }
