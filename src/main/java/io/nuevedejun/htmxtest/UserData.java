@@ -8,6 +8,7 @@ import io.nuevedejun.htmxtest.transaction.TransactionService.PageItem;
 import io.nuevedejun.htmxtest.user.UserInfoService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class UserData {
 	/**
 	 * Page size. If null, get the user preference from DB.
 	 */
+	@Nullable
 	private Integer size;
 
 	public List<TransactionModel> getTransactions() {

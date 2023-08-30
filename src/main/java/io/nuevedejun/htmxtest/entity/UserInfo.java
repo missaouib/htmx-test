@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.lang.Nullable;
 
 import java.util.UUID;
 
@@ -20,11 +21,15 @@ public class UserInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
+
 	@JdbcTypeCode(SqlTypes.JSON)
 	private Preferences preferences;
 
 	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class Preferences {
+		@Nullable
 		private Integer pageSize;
 	}
 }

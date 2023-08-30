@@ -26,7 +26,7 @@ public class TransactionsController {
 	private final UserInfoService userInfoService;
 
 	@GetMapping
-	public ModelAndView transactions(@Nullable @RequestParam Integer page, @Nullable @RequestParam Integer size) {
+	public ModelAndView transactions(@RequestParam @Nullable Integer page, @RequestParam @Nullable Integer size) {
 		final int goodPage = validatePage(page);
 		final Integer goodSize = validateSize(size);
 		var userData = new UserData(service, userInfoService, goodPage, goodSize);
@@ -36,7 +36,7 @@ public class TransactionsController {
 		return new ModelAndView("transactions", model);
 	}
 
-	private int validatePage(Integer page) {
+	private int validatePage(@Nullable Integer page) {
 		if (page == null) return FALLBACK_PAGE;
 		if (page < 1) {
 			throw new IllegalArgumentException("page must be greater than zero");
@@ -49,7 +49,7 @@ public class TransactionsController {
 	 * required.
 	 */
 	@Nullable
-	private Integer validateSize(Integer size) {
+	private Integer validateSize(@Nullable Integer size) {
 		if (size == null) return null;
 
 		final Integer picked = ViewOptions.PAGE_SIZES.floor(size);
