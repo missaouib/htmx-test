@@ -4,7 +4,9 @@
 }
 
 .discoverable:hover {
-    white-space: normal;
+    min-width: max-content;
+    position: relative;
+    background-color: var(--sl-color-neutral-0);
 }
 
 .bg-neutral {

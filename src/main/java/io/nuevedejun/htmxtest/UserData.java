@@ -17,9 +17,8 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class UserData {
-	public static final String USER_DATA_ATTR = "userData";
 	public static final int FALLBACK_PAGE = 1;
-	public static final int FALLBACK_SIZE = ViewOptions.PAGE_SIZES.first();
+	public static final int FALLBACK_SIZE = ModelData.PAGE_SIZES.first();
 	public static final int FALLBACK_WINDOW = 3;
 
 	private final TransactionService transactionService;

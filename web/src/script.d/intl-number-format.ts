@@ -13,8 +13,12 @@ export class IntlNumberFormat extends LitElement {
 
     render() {
         const formatter = new Intl.NumberFormat(this.locale, this.options);
+        const parts = formatter.formatToParts(this.value);
         return html`
-          <data value="${this.value}">${formatter.format(this.value)}</data>`;
+          <data value="${this.value}">
+            ${parts.map(part =>
+                html`<span part="${part.type}">${part.value}</span>`)}
+          </data>`;
     }
 }
 

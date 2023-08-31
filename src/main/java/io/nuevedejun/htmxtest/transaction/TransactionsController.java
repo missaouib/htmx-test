@@ -1,7 +1,7 @@
 package io.nuevedejun.htmxtest.transaction;
 
+import io.nuevedejun.htmxtest.ModelData;
 import io.nuevedejun.htmxtest.UserData;
-import io.nuevedejun.htmxtest.ViewOptions;
 import io.nuevedejun.htmxtest.user.UserInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
 import java.util.Objects;
 
+import static io.nuevedejun.htmxtest.ModelData.MODEL_DATA_ATTR;
 import static io.nuevedejun.htmxtest.UserData.FALLBACK_PAGE;
-import static io.nuevedejun.htmxtest.UserData.USER_DATA_ATTR;
-import static io.nuevedejun.htmxtest.ViewOptions.VIEW_OPTS_ATTR;
 
 @Controller
 @RequestMapping("/transactions")
@@ -29,11 +27,9 @@ public class TransactionsController {
 	public ModelAndView transactions(@RequestParam @Nullable Integer page, @RequestParam @Nullable Integer size) {
 		final int goodPage = validatePage(page);
 		final Integer goodSize = validateSize(size);
-		var userData = new UserData(service, userInfoService, goodPage, goodSize);
-		final Map<String, ?> model = Map.of(
-				USER_DATA_ATTR, userData,
-				VIEW_OPTS_ATTR, new ViewOptions());
-		return new ModelAndView("transactions", model);
+		final UserData userData = new UserData(service, userInfoService, goodPage, goodSize);
+		final ModelData model = new ModelData(userData);
+		return new ModelAndView("transactions", MODEL_DATA_ATTR, model);
 	}
 
 	private int validatePage(@Nullable Integer page) {
@@ -52,12 +48,12 @@ public class TransactionsController {
 	private Integer validateSize(@Nullable Integer size) {
 		if (size == null) return null;
 
-		final Integer picked = ViewOptions.PAGE_SIZES.floor(size);
+		final Integer picked = ModelData.PAGE_SIZES.floor(size);
 		if (picked != null) savePageSizePreference(picked);
 		return picked;
 	}
 
-	private void savePageSizePreference(int picked) {
+	private void savePageSizePreference(int picked) { // TODO move this to the service
 		userInfoService.getUserInfo().ifPresent(info -> {
 			if (!Objects.equals(info.getPreferences().getPageSize(), picked)) {
 				info.getPreferences().setPageSize(picked);
