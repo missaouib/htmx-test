@@ -11,7 +11,7 @@
         <table class="data-table text-left">
           <!--Set widths, resizable horizonral, ellipsis, overflow hidden
           - Save user preferred widths -->
-          <thead class="sticky top-0 bg-neutral">
+          <thead class="sticky top-0 bg-neutral-0">
           <tr>
             <th>
               <div>Date</div>
@@ -64,13 +64,13 @@
           </tbody>
         </table>
       </div>
-      <div class="flex-initial flex flex-row">
-        <div class="size-dropdown">
+      <div class="flex-initial flex flex-row select-none">
+        <div class="text-sm">
           <label>
             Results per page:
             <span class="dropdown">
               <select name="size" class="text-right"
-                      th:hx-get="@{/transactions(page=${model.userData.page})}"
+                      th:hx-get="@{/transactions}"
                       hx-target="#transaction-explorer"
                       hx-select="#transaction-explorer"
                       hx-swap="outerHTML"
@@ -87,13 +87,13 @@
             hx-target="#transaction-explorer"
             hx-select="#transaction-explorer"
             hx-swap="outerHTML">
-          <li th:each="pageItem : ${model.userData.pagination}" class="inline-block">
+          <li th:each="pageItem : ${model.userData.pagination}" class="inline-block text-sm">
             <div th:if="${pageItem.selected}" th:text="${pageItem.number}"
-                 class="flex w-full h-full items-center justify-center selected"></div>
+                 class="flex w-full h-full items-center justify-center rounded-full selected"></div>
             <div th:if="${pageItem.blank}" class="flex w-full h-full items-center justify-center">&#8230;</div>
             <a th:unless="${pageItem.blank || pageItem.selected}" th:text="${pageItem.number}"
-               th:href="@{/transactions(page=${pageItem.number},size=${model.userData.size})}"
-               class="flex w-full h-full items-center justify-center">1</a>
+               th:href="@{/transactions(page=${pageItem.number})}"
+               class="flex w-full h-full items-center justify-center rounded-full no-underline">1</a>
           </li>
         </ul>
       </div>

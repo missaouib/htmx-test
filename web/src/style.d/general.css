@@ -101,3 +101,20 @@
 .max-w-xxxs {
     max-width: 10rem;
 }
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.no-underline {
+    text-decoration-line: none;
+}
+
+.select-none {
+    user-select: none;
+}

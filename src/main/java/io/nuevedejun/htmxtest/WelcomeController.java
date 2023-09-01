@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import static io.nuevedejun.htmxtest.ModelData.MODEL_DATA_ATTR;
-import static io.nuevedejun.htmxtest.UserData.FALLBACK_PAGE;
+import static io.nuevedejun.htmxtest.UserData.FIRST_PAGE;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,7 +18,7 @@ public class WelcomeController {
 
 	@GetMapping("/welcome")
 	public ModelAndView welcome() {
-		final UserData userData = new UserData(transactionService, userInfoService, FALLBACK_PAGE, null);
+		final UserData userData = new UserData(transactionService, userInfoService, FIRST_PAGE, null);
 		final ModelData model = new ModelData(userData);
 		return new ModelAndView("welcome", MODEL_DATA_ATTR, model);
 	}

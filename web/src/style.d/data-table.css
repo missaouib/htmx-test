@@ -4,4 +4,5 @@
 
 .data-table th > div, .data-table td > div {
     padding: var(--sl-spacing-small);
+    background-color: var(--sl-color-neutral-0);
 }

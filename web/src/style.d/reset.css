@@ -6,7 +6,7 @@ body, ul {
     font-family: var(--sl-font-sans);
     margin: 0;
     padding: 0;
-    line-height: var(--sl-line-height-dense);
+    line-height: 1.4;
 }
 
 table {

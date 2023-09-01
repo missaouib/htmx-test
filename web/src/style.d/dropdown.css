@@ -23,16 +23,12 @@
     content: " ";
     position: absolute;
     top: 50%;
+    margin-top: -2px;
     right: 8px;
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    margin-top: -2px;
     border-top: 5px solid var(--sl-color-gray-400);
     pointer-events: none;
-}
-
-.size-dropdown {
-    font-size: .9rem;
 }

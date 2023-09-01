@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Objects;
 
 import static io.nuevedejun.htmxtest.ModelData.MODEL_DATA_ATTR;
-import static io.nuevedejun.htmxtest.UserData.FALLBACK_PAGE;
+import static io.nuevedejun.htmxtest.UserData.FIRST_PAGE;
 
 @Controller
 @RequestMapping("/transactions")
@@ -33,7 +33,7 @@ public class TransactionsController {
 	}
 
 	private int validatePage(@Nullable Integer page) {
-		if (page == null) return FALLBACK_PAGE;
+		if (page == null) return FIRST_PAGE;
 		if (page < 1) {
 			throw new IllegalArgumentException("page must be greater than zero");
 		}
