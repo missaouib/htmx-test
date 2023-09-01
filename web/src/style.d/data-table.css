@@ -1,8 +1,0 @@
-.data-table th, .data-table td {
-    border-bottom: 1px solid var(--sl-color-neutral-300);
-}
-
-.data-table th > div, .data-table td > div {
-    padding: var(--sl-spacing-small);
-    background-color: var(--sl-color-neutral-0);
-}

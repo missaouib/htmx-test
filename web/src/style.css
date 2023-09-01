@@ -1,7 +1,5 @@
-@import "style.d/reset.css";
-@import "style.d/general.css";
-@import "style.d/decoration.css";
-@import "style.d/pagination.css";
-@import "style.d/dropdown.css";
-@import "style.d/data-table.css";
-@import "style.d/number-format.css";
+@import "style.d/number-format.css"; /* TODO move to tailwind component */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

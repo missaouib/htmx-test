@@ -6,13 +6,11 @@
 <body>
 <div th:replace="~{base::wrap(~{::#transaction-explorer})}">
   <div id="transaction-explorer" class="w-full h-full p-4">
-    <div class="w-full h-full flex flex-col rounded-solid overflow-hidden">
+    <div class="w-full h-full flex flex-col rounded border border-neutral-300 overflow-hidden">
       <div class="flex-1 min-h-0 overflow-auto">
-        <table class="data-table text-left">
-          <!--Set widths, resizable horizonral, ellipsis, overflow hidden
-          - Save user preferred widths -->
-          <thead class="sticky top-0 bg-neutral-0">
-          <tr>
+        <table class="text-left">
+          <thead class="sticky top-0 bg-white">
+          <tr class="[&>th]:border-b [&>th]:border-b-neutral-300 [&>th>div]:p-3">
             <th>
               <div>Date</div>
             </th>
@@ -31,7 +29,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="transaction : ${model.userData.transactions}">
+          <tr th:each="transaction : ${model.userData.transactions}"
+              class="[&>td]:border-b [&>td]:border-b-neutral-300 [&>td>div]:p-3 [&>td>div]:bg-white">
             <td>
               <div class="w-max inline-block">
                 <sl-format-date
@@ -41,16 +40,18 @@
                 </sl-format-date>
               </div>
             </td>
-            <td class="max-w-xxxs">
+            <td class="max-w-[10rem]">
               <div th:text="${transaction.account}"
-                   class="whitespace-nowrap overflow-hidden text-ellipsis discoverable"></div>
+                   class="whitespace-nowrap overflow-hidden text-ellipsis
+                          hover:min-w-max hover:relative hover:rounded-full hover:bg-white/90"></div>
             </td>
-            <td class="max-w-xxs">
+            <td class="max-w-[12.5rem]">
               <div th:text="${transaction.category}"
-                   class="whitespace-nowrap overflow-hidden text-ellipsis discoverable"></div>
+                   class="whitespace-nowrap overflow-hidden text-ellipsis
+                          hover:min-w-max hover:relative hover:rounded-full hover:bg-white/90"></div>
             </td>
-            <td th:text="${transaction.note}">
-              <div>Payment at MASXMENOS</div>
+            <td class="min-w-[16rem]">
+              <div th:text="${transaction.note}">Payment at MASXMENOS</div>
             </td>
             <td class="text-right">
               <div class="w-max inline-block">
@@ -68,7 +69,7 @@
         <div class="text-sm">
           <label>
             Results per page:
-            <span class="dropdown">
+            <span>
               <select name="size" class="text-right"
                       th:hx-get="@{/transactions}"
                       hx-target="#transaction-explorer"
@@ -82,18 +83,19 @@
             </span>
           </label>
         </div>
-        <ul class="pagination"
-            hx-boost="true"
+        <!-- TODO add hx-indicators to all requests -->
+        <ul hx-boost="true"
             hx-target="#transaction-explorer"
             hx-select="#transaction-explorer"
             hx-swap="outerHTML">
-          <li th:each="pageItem : ${model.userData.pagination}" class="inline-block text-sm">
+          <li th:each="pageItem : ${model.userData.pagination}"
+              class="inline-block h-[2.25rem] min-w-[2.25rem] text-sm">
             <div th:if="${pageItem.selected}" th:text="${pageItem.number}"
-                 class="flex w-full h-full items-center justify-center rounded-full selected"></div>
+                 class="flex w-full h-full items-center justify-center rounded-full text-white bg-teal-900"></div>
             <div th:if="${pageItem.blank}" class="flex w-full h-full items-center justify-center">&#8230;</div>
             <a th:unless="${pageItem.blank || pageItem.selected}" th:text="${pageItem.number}"
                th:href="@{/transactions(page=${pageItem.number})}"
-               class="flex w-full h-full items-center justify-center rounded-full no-underline">1</a>
+               class="flex w-full h-full items-center justify-center rounded-full hover:bg-neutral-100">1</a>
           </li>
         </ul>
       </div>
