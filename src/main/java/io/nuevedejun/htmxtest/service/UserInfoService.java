@@ -1,4 +1,4 @@
-package io.nuevedejun.htmxtest.user;
+package io.nuevedejun.htmxtest.service;
 
 import io.nuevedejun.htmxtest.entity.UserInfo;
 import io.nuevedejun.htmxtest.repository.UserInfoRepository;
@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,7 +21,11 @@ public class UserInfoService {
 	}
 
 	@Transactional
-	public void save(UserInfo userInfo) {
-		repository.save(userInfo);
+	public void savePageSizePreference(int size) {
+		UserInfo info = getUserInfo().orElseThrow(() -> new NoSuchElementException("Unable to find user info"));
+		if (!Objects.equals(info.getPreferences().getPageSize(), size)) {
+			info.getPreferences().setPageSize(size);
+			repository.save(info);
+		}
 	}
 }

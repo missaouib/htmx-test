@@ -1,4 +1,4 @@
-@import "style.d/number-format.css"; /* TODO move to tailwind component */
+@import "style.d/number-format.css";
 
 @tailwind base;
 @tailwind components;

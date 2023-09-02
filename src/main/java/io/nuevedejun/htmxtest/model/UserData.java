@@ -1,11 +1,11 @@
-package io.nuevedejun.htmxtest;
+package io.nuevedejun.htmxtest.model;
 
+import io.nuevedejun.htmxtest.dto.TransactionData;
 import io.nuevedejun.htmxtest.entity.UserInfo;
 import io.nuevedejun.htmxtest.entity.UserInfo.Preferences;
-import io.nuevedejun.htmxtest.transaction.TransactionModel;
-import io.nuevedejun.htmxtest.transaction.TransactionService;
-import io.nuevedejun.htmxtest.transaction.TransactionService.PageItem;
-import io.nuevedejun.htmxtest.user.UserInfoService;
+import io.nuevedejun.htmxtest.service.TransactionService;
+import io.nuevedejun.htmxtest.service.TransactionService.PageItem;
+import io.nuevedejun.htmxtest.service.UserInfoService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.lang.Nullable;
@@ -32,7 +32,7 @@ public class UserData {
 	@Nullable
 	private Integer size;
 
-	public List<TransactionModel> getTransactions() {
+	public List<TransactionData> getTransactions() {
 		return transactionService.getLatestTransactions(page - 1, getSize());
 	}
 

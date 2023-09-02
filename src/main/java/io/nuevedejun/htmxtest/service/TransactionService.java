@@ -1,5 +1,6 @@
-package io.nuevedejun.htmxtest.transaction;
+package io.nuevedejun.htmxtest.service;
 
+import io.nuevedejun.htmxtest.dto.TransactionData;
 import io.nuevedejun.htmxtest.entity.Transaction;
 import io.nuevedejun.htmxtest.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +17,14 @@ import java.util.stream.IntStream;
 public class TransactionService {
 	private final TransactionRepository repository;
 
-	public List<TransactionModel> getLatestTransactions(int page, int size) {
+	public List<TransactionData> getLatestTransactions(int page, int size) {
 		var pageable = PageRequest.of(page, size, Sort.Direction.DESC, "date");
 		return repository.findAll(pageable).stream()
-				.map(this::toModel).toList();
+				.map(this::toDTO).toList();
 	}
 
-	private TransactionModel toModel(Transaction transaction) {
-		return new TransactionModel(
+	private TransactionData toDTO(Transaction transaction) {
+		return new TransactionData(
 				transaction.getDate(),
 				transaction.getAccount(),
 				transaction.getCategory(),
