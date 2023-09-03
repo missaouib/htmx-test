@@ -25,11 +25,6 @@ public class UserInfo {
 	@JdbcTypeCode(SqlTypes.JSON)
 	private Preferences preferences;
 
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class Preferences {
-		@Nullable
-		private Integer pageSize;
+	public record Preferences(@Nullable Integer pageSize) {
 	}
 }

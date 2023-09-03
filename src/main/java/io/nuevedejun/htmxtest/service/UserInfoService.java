@@ -1,6 +1,7 @@
 package io.nuevedejun.htmxtest.service;
 
 import io.nuevedejun.htmxtest.entity.UserInfo;
+import io.nuevedejun.htmxtest.entity.UserInfo.Preferences;
 import io.nuevedejun.htmxtest.repository.UserInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class UserInfoService {
 	@Transactional
 	public void savePageSizePreference(int size) {
 		UserInfo info = getUserInfo().orElseThrow(() -> new NoSuchElementException("Unable to find user info"));
-		if (!Objects.equals(info.getPreferences().getPageSize(), size)) {
-			info.getPreferences().setPageSize(size);
+		if (!Objects.equals(info.getPreferences().pageSize(), size)) {
+			info.setPreferences(new Preferences(size));
 			repository.save(info);
 		}
 	}

@@ -44,7 +44,7 @@ public class UserData {
 		if (size == null) {
 			size = userInfoService.getUserInfo()
 					.map(UserInfo::getPreferences)
-					.map(Preferences::getPageSize)
+					.map(Preferences::pageSize)
 					.orElse(FALLBACK_SIZE);
 		}
 		return size;
