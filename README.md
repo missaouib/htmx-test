@@ -20,9 +20,9 @@ Postgres DB must be running for the service to start successfully. `cd` into `do
 docker compose up -d
 ```
 
-During development, start the project using the Spring Boot Maven plugin and the Maven profile `vite-watch` to monitor
+During development, start the project using the Spring Boot Maven plugin and the Maven profile `npm-watch` to monitor
 file changes in the web project and enable live reload:
 
 ```bash
-./mvnw spring-boot:run -Pvite-watch
+./mvnw spring-boot:run -Pnpm-watch
 ```

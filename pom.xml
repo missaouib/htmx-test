@@ -147,7 +147,7 @@
 
   <profiles>
     <profile>
-      <id>vite-watch</id>
+      <id>npm-watch</id>
       <build>
         <plugins>
           <plugin>
