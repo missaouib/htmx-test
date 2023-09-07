@@ -1,0 +1,13 @@
+@layer components {
+    intl-number-format::part(currency), intl-number-format::part(literal) {
+        display: none;
+    }
+
+    .htmx-indicator {
+        pointer-events: none;
+    }
+
+    .htmx-request .htmx-indicator {
+        pointer-events: unset;
+    }
+}

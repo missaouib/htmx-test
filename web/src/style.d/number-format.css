@@ -1,5 +1,0 @@
-@layer components {
-    intl-number-format::part(currency), intl-number-format::part(literal) {
-        display: none;
-    }
-}
