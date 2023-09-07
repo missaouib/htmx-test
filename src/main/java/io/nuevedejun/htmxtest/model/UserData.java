@@ -71,6 +71,13 @@ public class UserData {
 		return pagination;
 	}
 
+	/**
+	 * Builds a list of pagination items depending on the total amount of pages. It takes into account the desired number
+	 * of pages to display around the current page to calculate the size and contents of the list, and always
+	 * generate the same amount of items.
+	 *
+	 * @return a list of pagination items
+	 */
 	private List<PageItem> buildPagination() {
 		final int totalPages = getTransactionPage().getTotalPages();
 

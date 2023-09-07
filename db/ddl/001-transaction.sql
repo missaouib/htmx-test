@@ -9,4 +9,6 @@ create table transaction
     primary key (id)
 );
 
-create index IDXk3n1glkf8cs6vumkk0t46lk60 on transaction (date);
+create index transaction_date_idx on transaction (date);
+
+comment on column transaction.note is 'General-use text column';

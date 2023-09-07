@@ -9,23 +9,28 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class TransactionService {
-	private final TransactionRepository repository;
+public interface TransactionService {
+	Page<TransactionData> getLatestTransactions(int page, int size);
 
-	public Page<TransactionData> getLatestTransactions(int page, int size) {
-		var pageable = PageRequest.of(page, size, Sort.Direction.DESC, "date");
-		return repository.findAll(pageable).map(this::toDTO);
-	}
+	@Service
+	@RequiredArgsConstructor
+	class Default implements TransactionService {
+		private final TransactionRepository repository;
 
-	private TransactionData toDTO(Transaction transaction) {
-		return new TransactionData(
-				transaction.getDate(),
-				transaction.getAccount(),
-				transaction.getCategory(),
-				transaction.getNote(),
-				transaction.getAmount()
-		);
+		@Override
+		public Page<TransactionData> getLatestTransactions(int page, int size) {
+			var pageable = PageRequest.of(page, size, Sort.Direction.DESC, "date");
+			return repository.findAll(pageable).map(this::toDTO);
+		}
+
+		private TransactionData toDTO(Transaction transaction) {
+			return new TransactionData(
+					transaction.getDate(),
+					transaction.getAccount(),
+					transaction.getCategory(),
+					transaction.getNote(),
+					transaction.getAmount()
+			);
+		}
 	}
 }
