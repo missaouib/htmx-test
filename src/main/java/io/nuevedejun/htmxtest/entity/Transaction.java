@@ -1,6 +1,10 @@
 package io.nuevedejun.htmxtest.entity;
 
-import jakarta.persistence.*;
+import io.nuevedejun.htmxtest.hibernate.UUIDVersion6;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Transaction {
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@UUIDVersion6
 	private UUID id;
 
 	private OffsetDateTime date;
