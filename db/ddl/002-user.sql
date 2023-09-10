@@ -1,4 +1,4 @@
-create table user_info
+create table "user"
 (
     id          uuid  not null,
     preferences jsonb not null,

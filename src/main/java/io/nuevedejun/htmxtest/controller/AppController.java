@@ -3,7 +3,7 @@ package io.nuevedejun.htmxtest.controller;
 import io.nuevedejun.htmxtest.model.ModelData;
 import io.nuevedejun.htmxtest.model.UserData;
 import io.nuevedejun.htmxtest.service.TransactionService;
-import io.nuevedejun.htmxtest.service.UserInfoService;
+import io.nuevedejun.htmxtest.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
@@ -24,13 +24,13 @@ public interface AppController {
 	@RequiredArgsConstructor
 	class Default implements AppController {
 		private final TransactionService transactionService;
-		private final UserInfoService userInfoService;
+		private final UserService userService;
 
 		@Override
 		public ModelAndView app(@Nullable Integer page, @Nullable Integer size) {
 			final int goodPage = validatePage(page);
 			final Integer goodSize = validateSize(size);
-			final UserData userData = new UserData(transactionService, userInfoService, goodPage, goodSize);
+			final UserData userData = new UserData(transactionService, userService, goodPage, goodSize);
 			final ModelData model = new ModelData(userData);
 			return new ModelAndView("app", MODEL_DATA_ATTR, model);
 		}
@@ -49,7 +49,7 @@ public interface AppController {
 			if (size == null) return null;
 
 			final Integer picked = ModelData.PAGE_SIZES.floor(size);
-			if (picked != null) userInfoService.savePageSizePreference(picked);
+			if (picked != null) userService.savePageSizePreference(picked);
 			return picked;
 		}
 	}

@@ -1,10 +1,10 @@
 package io.nuevedejun.htmxtest.model;
 
 import io.nuevedejun.htmxtest.dto.TransactionData;
-import io.nuevedejun.htmxtest.entity.UserInfo;
-import io.nuevedejun.htmxtest.entity.UserInfo.Preferences;
+import io.nuevedejun.htmxtest.entity.User;
+import io.nuevedejun.htmxtest.entity.User.Preferences;
 import io.nuevedejun.htmxtest.service.TransactionService;
-import io.nuevedejun.htmxtest.service.UserInfoService;
+import io.nuevedejun.htmxtest.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,7 +24,7 @@ public class UserData {
 	public static final int FALLBACK_WINDOW = 3;
 
 	private final TransactionService transactionService;
-	private final UserInfoService userInfoService;
+	private final UserService userService;
 	@Getter
 	private final int page;
 
@@ -41,8 +41,8 @@ public class UserData {
 	@Nullable
 	private List<PageItem> pagination;
 
-	public UserData(TransactionService transactionService, UserInfoService userInfoService, int page, @Nullable Integer size) {
-		this(transactionService, userInfoService, page);
+	public UserData(TransactionService transactionService, UserService userService, int page, @Nullable Integer size) {
+		this(transactionService, userService, page);
 		this.size = size;
 	}
 
@@ -111,8 +111,8 @@ public class UserData {
 
 	public int getSize() {
 		if (size == null) {
-			size = userInfoService.getUserInfo()
-					.map(UserInfo::getPreferences)
+			size = userService.getUser()
+					.map(User::getPreferences)
 					.map(Preferences::pageSize)
 					.orElse(FALLBACK_SIZE);
 		}
