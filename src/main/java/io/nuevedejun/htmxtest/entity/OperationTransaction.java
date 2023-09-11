@@ -7,30 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(indexes = {
-		@Index(columnList = "date"),
-		@Index(columnList = "user_id")
-})
+@Table(indexes = @Index(columnList = "operation_id, transaction_id", unique = true))
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction {
+public class OperationTransaction {
 	@Id
 	@UUIDVersion6
 	private UUID id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private User user;
+	@ManyToOne
+	private Operation operation;
 
-	private OffsetDateTime date;
-
-	private String account;
-
-	private String note;
+	@ManyToOne
+	private Transaction transaction;
 
 	private BigDecimal amount;
 }

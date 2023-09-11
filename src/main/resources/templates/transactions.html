@@ -64,6 +64,12 @@
         </tr>
         </tbody>
       </table>
+      <th:block th:if="${#lists.isEmpty(model.userData.transactions)}">
+        <div class="w-full h-full p-3 text-5xl text-neutral-200 font-black
+                    flex items-center justify-center select-none">
+          Empty
+        </div>
+      </th:block>
     </div>
     <div class="flex-initial flex flex-row justify-between select-none items-baseline py-1 pl-1 pr-3">
       <ul hx-boost="true"

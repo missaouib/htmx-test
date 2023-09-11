@@ -18,7 +18,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction {
+public class Operation {
 	@Id
 	@UUIDVersion6
 	private UUID id;
@@ -28,7 +28,7 @@ public class Transaction {
 
 	private OffsetDateTime date;
 
-	private String account;
+	private String category;
 
 	private String note;
 

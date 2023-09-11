@@ -22,6 +22,7 @@ public class UserData {
 	public static final int FIRST_PAGE = 1;
 	public static final int FALLBACK_SIZE = ModelData.PAGE_SIZES.first();
 	public static final int FALLBACK_WINDOW = 3;
+	private static final int SLIDER = 2 * FALLBACK_WINDOW + 1;
 
 	private final TransactionService transactionService;
 	private final UserService userService;
@@ -81,11 +82,14 @@ public class UserData {
 	private List<PageItem> buildPagination() {
 		final int totalPages = getTransactionPage().getTotalPages();
 
-		final int slider = 2 * FALLBACK_WINDOW + 1;
-		final int lower = Math.max(Math.min(page - FALLBACK_WINDOW, totalPages - 1 - slider), 2);
-		final int upper = Math.min(Math.max(page + FALLBACK_WINDOW, 2 + slider), totalPages - 1);
+		if (totalPages < 2) {
+			return List.of(selectedPageItem(page, 1));
+		}
 
-		var result = new ArrayList<PageItem>(4 + slider);
+		final int lower = Math.max(Math.min(page - FALLBACK_WINDOW, totalPages - 1 - SLIDER), 2);
+		final int upper = Math.min(Math.max(page + FALLBACK_WINDOW, 2 + SLIDER), totalPages - 1);
+
+		var result = new ArrayList<PageItem>(4 + SLIDER);
 		result.add(selectedPageItem(page, 1));
 		if (lower == 3) {
 			result.add(selectedPageItem(page, 2));

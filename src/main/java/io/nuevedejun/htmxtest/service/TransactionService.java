@@ -27,7 +27,7 @@ public interface TransactionService {
 			return new TransactionData(
 					transaction.getDate(),
 					transaction.getAccount(),
-					transaction.getCategory(),
+					"",
 					transaction.getNote(),
 					transaction.getAmount()
 			);
