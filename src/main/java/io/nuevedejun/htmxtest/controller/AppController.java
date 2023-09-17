@@ -2,7 +2,7 @@ package io.nuevedejun.htmxtest.controller;
 
 import io.nuevedejun.htmxtest.model.ModelData;
 import io.nuevedejun.htmxtest.model.UserData;
-import io.nuevedejun.htmxtest.service.TransactionService;
+import io.nuevedejun.htmxtest.service.OperationService;
 import io.nuevedejun.htmxtest.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
@@ -23,14 +23,14 @@ public interface AppController {
 	@Controller
 	@RequiredArgsConstructor
 	class Default implements AppController {
-		private final TransactionService transactionService;
+		private final OperationService operationService;
 		private final UserService userService;
 
 		@Override
 		public ModelAndView app(@Nullable Integer page, @Nullable Integer size) {
 			final int goodPage = validatePage(page);
 			final Integer goodSize = validateSize(size);
-			final UserData userData = new UserData(transactionService, userService, goodPage, goodSize);
+			final UserData userData = new UserData(operationService, userService, goodPage, goodSize);
 			final ModelData model = new ModelData(userData);
 			return new ModelAndView("app", MODEL_DATA_ATTR, model);
 		}

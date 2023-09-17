@@ -2,10 +2,10 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{head::wrap(~{::title},~{::body})}" lang="en">
 <head>
-  <title>transactions</title>
+  <title>operations</title>
 </head>
 <body>
-<div id="transaction-explorer" class="w-full h-full p-4">
+<div id="operation-explorer" class="w-full h-full p-4">
   <div class="w-full h-full flex flex-col rounded border border-neutral-300 overflow-hidden relative">
     <div class="flex-1 min-h-0 overflow-auto border-b border-b-neutral-300">
       <table class="text-left">
@@ -29,34 +29,34 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="transaction : ${model.userData.transactions}"
+        <tr th:each="operation : ${model.userData.operations}"
             class="[&>td]:border-t [&>td]:border-t-neutral-300 [&>td>div]:p-3 [&>td>div]:bg-white">
           <td>
             <div class="w-max inline-block">
               <sl-format-date
-                  th:date="${#temporals.formatISO(transaction.date)}"
+                  th:date="${#temporals.formatISO(operation.date)}"
                   year="numeric" month="2-digit" day="2-digit"
                   hour="2-digit" minute="2-digit">
               </sl-format-date>
             </div>
           </td>
           <td class="max-w-[10rem]">
-            <div th:text="${transaction.account}"
+            <div th:text="${operation.account}"
                  class="whitespace-nowrap overflow-hidden text-ellipsis
                         hover:min-w-max hover:relative hover:rounded-full hover:bg-white/90"></div>
           </td>
           <td class="max-w-[12.5rem]">
-            <div th:text="${transaction.category}"
+            <div th:text="${operation.category}"
                  class="whitespace-nowrap overflow-hidden text-ellipsis
                         hover:min-w-max hover:relative hover:rounded-full hover:bg-white/90"></div>
           </td>
           <td class="min-w-[16rem]">
-            <div th:text="${transaction.note}">Payment at MASXMENOS</div>
+            <div th:text="${operation.note}">Payment at MASXMENOS</div>
           </td>
           <td class="text-right">
             <div class="w-max inline-block">
               <intl-number-format
-                  th:value="${transaction.amount}"
+                  th:value="${operation.amount}"
                   options='{"style":"currency","currency":"COP"}'>
               </intl-number-format>
             </div>
@@ -64,7 +64,7 @@
         </tr>
         </tbody>
       </table>
-      <th:block th:if="${#lists.isEmpty(model.userData.transactions)}">
+      <th:block th:if="${#lists.isEmpty(model.userData.operations)}">
         <div class="w-full h-full p-3 text-5xl text-neutral-200 font-black
                     flex items-center justify-center select-none">
           Empty
@@ -73,9 +73,9 @@
     </div>
     <div class="flex-initial flex flex-row justify-between select-none items-baseline py-1 pl-1 pr-3">
       <ul hx-boost="true"
-          hx-target="#transaction-explorer"
-          hx-select="#transaction-explorer"
-          hx-indicator="#transaction-explorer"
+          hx-target="#operation-explorer"
+          hx-select="#operation-explorer"
+          hx-indicator="#operation-explorer"
           hx-swap="outerHTML"
           hx-sync="this">
         <li th:each="pageItem : ${model.userData.pagination}"
@@ -93,8 +93,8 @@
           Results per page:
           <select name="size" class="text-right bg-white/0 cursor-pointer"
                   th:hx-get="@{/app}"
-                  hx-target="#transaction-explorer"
-                  hx-select="#transaction-explorer"
+                  hx-target="#operation-explorer"
+                  hx-select="#operation-explorer"
                   hx-swap="outerHTML"
                   hx-push-url="true">
             <option th:each="size : ${model.pageSizes}"

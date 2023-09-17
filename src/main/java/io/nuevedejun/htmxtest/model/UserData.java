@@ -1,9 +1,9 @@
 package io.nuevedejun.htmxtest.model;
 
-import io.nuevedejun.htmxtest.dto.TransactionData;
+import io.nuevedejun.htmxtest.dto.OperationData;
 import io.nuevedejun.htmxtest.entity.User;
 import io.nuevedejun.htmxtest.entity.User.Preferences;
-import io.nuevedejun.htmxtest.service.TransactionService;
+import io.nuevedejun.htmxtest.service.OperationService;
 import io.nuevedejun.htmxtest.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class UserData {
 	public static final int FALLBACK_WINDOW = 3;
 	private static final int SLIDER = 2 * FALLBACK_WINDOW + 1;
 
-	private final TransactionService transactionService;
+	private final OperationService operationService;
 	private final UserService userService;
 	@Getter
 	private final int page;
@@ -36,29 +36,29 @@ public class UserData {
 	private Integer size;
 
 	@Nullable
-	private Page<TransactionData> transactionPage;
+	private Page<OperationData> operationPage;
 	@Nullable
-	private List<TransactionData> transactions;
+	private List<OperationData> operations;
 	@Nullable
 	private List<PageItem> pagination;
 
-	public UserData(TransactionService transactionService, UserService userService, int page, @Nullable Integer size) {
-		this(transactionService, userService, page);
+	public UserData(OperationService operationService, UserService userService, int page, @Nullable Integer size) {
+		this(operationService, userService, page);
 		this.size = size;
 	}
 
-	private Page<TransactionData> getTransactionPage() {
-		if (transactionPage == null) {
-			transactionPage = transactionService.getLatestTransactions(page - 1, getSize());
+	private Page<OperationData> getOperationPage() {
+		if (operationPage == null) {
+			operationPage = operationService.getLatestOperations(page - 1, getSize());
 		}
-		return transactionPage;
+		return operationPage;
 	}
 
-	public List<TransactionData> getTransactions() {
-		if (transactions == null) {
-			transactions = getTransactionPage().toList();
+	public List<OperationData> getOperations() {
+		if (operations == null) {
+			operations = getOperationPage().toList();
 		}
-		return transactions;
+		return operations;
 	}
 
 	public record PageItem(int number, boolean selected, boolean blank) {
@@ -80,7 +80,7 @@ public class UserData {
 	 * @return a list of pagination items
 	 */
 	private List<PageItem> buildPagination() {
-		final int totalPages = getTransactionPage().getTotalPages();
+		final int totalPages = getOperationPage().getTotalPages();
 
 		if (totalPages < 2) {
 			return List.of(selectedPageItem(page, 1));
