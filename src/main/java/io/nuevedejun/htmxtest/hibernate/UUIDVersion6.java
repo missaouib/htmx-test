@@ -13,9 +13,16 @@ import static java.lang.annotation.ElementType.FIELD;
  * of the UUID can be configured using the env variable {@link UUIDVersion6Generator#V6_UUID_NODE_ADDR}.
  *
  * @see UUIDVersion6Generator
+ * @see IdGeneratorType
  */
 @IdGeneratorType(UUIDVersion6Generator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(FIELD)
 public @interface UUIDVersion6 {
+	String BLANK = "";
+
+	/**
+	 * MAC address used in the UUID.
+	 */
+	String address() default BLANK;
 }
