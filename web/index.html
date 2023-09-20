@@ -6,9 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>htmx test</title>
 </head>
-<body>
-<div hx-get="/app" hx-trigger="load" hx-swap="outerHTML" hx-select="body > div"
-     class="w-screen h-screen flex items-center justify-center">
+<body class="bg-neutral-100">
+<div class="w-screen h-screen flex flex-col items-center justify-center">
+  <p class="text-9xl">Welcome!</p>
+  <p class="text-3xl">This is the landing page.</p>
+  <p class="p-8">
+    <a class="text-neutral-500 hover:text-neutral-400"
+       hx-boost="true"
+       hx-target="body > div"
+       hx-select="body > div"
+       hx-indicator="body > div"
+       hx-swap="outerHTML"
+       hx-sync="this"
+       href="/app">View the application</a>
+  </p>
   <div class="htmx-indicator">
     <sl-spinner style="font-size: 3rem; --track-width: .6rem"></sl-spinner>
   </div>

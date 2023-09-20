@@ -16,11 +16,12 @@ public interface OperationService {
 	@RequiredArgsConstructor
 	class Default implements OperationService {
 		private final OperationRepository repository;
+		private final UserService userService;
 
 		@Override
 		public Page<OperationData> getLatestOperations(int page, int size) {
 			var pageable = PageRequest.of(page, size, Sort.Direction.DESC, "date");
-			return repository.findAll(pageable).map(this::toDTO);
+			return repository.findAllByUser(userService.getUser(), pageable).map(this::toDTO);
 		}
 
 		private OperationData toDTO(Operation operation) {

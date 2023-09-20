@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
+import static io.nuevedejun.htmxtest.security.WebSecurityConfig.TEST_USERNAME;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
@@ -52,7 +53,7 @@ class DummyDataIT {
 	@Disabled("generate dummy data once")
 	@Commit
 	void generateData() {
-		final User user = userRepository.save(new User(null, new Preferences(50)));
+		final User user = userRepository.save(new User(null, TEST_USERNAME, new Preferences(50)));
 		final ZoneOffset offset = Clock.systemDefaultZone().getZone().getRules().getOffset(Instant.now());
 
 		List<Operation> result = IntStream.range(0, 2000).mapToObj(i -> {
@@ -143,7 +144,7 @@ class DummyDataIT {
 				.map(entry -> Map.entry(transactionRepository.save(persist(entry.getKey())), entry.getValue()))
 				.toList();
 		final List<OperationTransaction> ots = savedTx.stream()
-				.map(tx -> new OperationTransaction(null, savedOp, tx.getKey(), tx.getValue()))
+				.map(tx -> new OperationTransaction(null, savedOp.getUser(), savedOp, tx.getKey(), tx.getValue()))
 				.toList();
 		operationTransactionRepository.saveAll(ots);
 		return savedOp;
@@ -155,7 +156,7 @@ class DummyDataIT {
 				.map(entry -> Map.entry(operationRepository.save(persist(entry.getKey())), entry.getValue()))
 				.toList();
 		final List<OperationTransaction> ots = savedOp.stream()
-				.map(op -> new OperationTransaction(null, op.getKey(), savedTx, op.getValue()))
+				.map(op -> new OperationTransaction(null, savedTx.getUser(), op.getKey(), savedTx, op.getValue()))
 				.toList();
 		operationTransactionRepository.saveAll(ots);
 		return savedTx;

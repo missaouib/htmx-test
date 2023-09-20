@@ -10,7 +10,11 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(indexes = @Index(columnList = "operation_id, transaction_id", unique = true))
+@Table(indexes = {
+		@Index(columnList = "operation_id, transaction_id", unique = true),
+		@Index(columnList = "transaction_id"),
+		@Index(columnList = "user_id")
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +22,9 @@ public class OperationTransaction {
 	@Id
 	@UUIDVersion6
 	private UUID id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
 
 	@ManyToOne
 	private Operation operation;

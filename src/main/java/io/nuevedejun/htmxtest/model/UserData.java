@@ -1,8 +1,6 @@
 package io.nuevedejun.htmxtest.model;
 
 import io.nuevedejun.htmxtest.dto.OperationData;
-import io.nuevedejun.htmxtest.entity.User;
-import io.nuevedejun.htmxtest.entity.User.Preferences;
 import io.nuevedejun.htmxtest.service.OperationService;
 import io.nuevedejun.htmxtest.service.UserService;
 import lombok.Getter;
@@ -12,6 +10,7 @@ import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 /**
@@ -115,9 +114,7 @@ public class UserData {
 
 	public int getSize() {
 		if (size == null) {
-			size = userService.getUser()
-					.map(User::getPreferences)
-					.map(Preferences::pageSize)
+			size = Optional.ofNullable(userService.getUserPreferences().pageSize())
 					.orElse(FALLBACK_SIZE);
 		}
 		return size;
